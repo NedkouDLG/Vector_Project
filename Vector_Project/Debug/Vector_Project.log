@@ -1,0 +1,7 @@
+﻿  Element.cpp
+  main.cpp
+D:\C++\Vector_Project\Vector_Project\Point.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Point.cpp
+D:\C++\Vector_Project\Vector_Project\Point.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
+  Vector_Project.vcxproj -> D:\C++\Vector_Project\Debug\Vector_Project.exe
