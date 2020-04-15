@@ -4,7 +4,7 @@ class Point:public Element
 {
 public:
 	Point();
-	Point(int, int, int);
+	Point(double, double, double);
 	Point(const Point&);
 	Point& operator=(const Point&);
 	bool operator==(const Point&);

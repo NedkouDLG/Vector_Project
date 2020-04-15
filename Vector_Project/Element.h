@@ -2,15 +2,15 @@
 class Element
 {
 protected:
-	int x;
-	int y;
-	int z;
+	double x;
+	double y;
+	double z;
 public:
-	void setX(int);
-	void setY(int);
-	void setZ(int);
-	int getX() const;
-	int getY() const;
-	int getZ() const;
+	void setX(double);
+	void setY(double);
+	void setZ(double);
+	double getX() const;
+	double getY() const;
+	double getZ() const;
 };
 

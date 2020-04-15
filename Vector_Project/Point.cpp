@@ -7,7 +7,7 @@ Point::Point()
 	this->setZ(0);
 }
 
-Point::Point(int x, int y, int z)
+Point::Point(double x, double y, double z)
 {
 	this->setX(x);
 	this->setY(y);

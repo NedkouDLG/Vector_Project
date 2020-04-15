@@ -1,31 +1,31 @@
 #include "Element.h"
 
-void Element::setX(int x)
+void Element::setX(double x)
 {
 	this->x = x;
 }
 
-void Element::setY(int y)
+void Element::setY(double y)
 {
 	this->y = y;
 }
 
-void Element::setZ(int z)
+void Element::setZ(double z)
 {
 	this->z = z;
 }
 
-int Element::getX() const
+double Element::getX() const
 {
 	return this->x;
 }
 
-int Element::getY() const
+double Element::getY() const
 {
 	return this->y;
 }
 
-int Element::getZ() const
+double Element::getZ() const
 {
 	return this->z;
 }
