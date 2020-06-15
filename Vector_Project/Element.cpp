@@ -1,31 +1,36 @@
 #include "Element.h"
 
-void Element::setX(double x)
-{
-	this->x = x;
-}
-
-void Element::setY(double y)
-{
-	this->y = y;
-}
-
-void Element::setZ(double z)
-{
-	this->z = z;
-}
-
 double Element::getX() const
 {
-	return this->x;
+	return x;
 }
 
 double Element::getY() const
 {
-	return this->y;
+	return y;
 }
 
 double Element::getZ() const
 {
-	return this->z;
+	return z;
+}
+
+std::ostream& Element::ins(std::ostream& out) const
+{
+	return out;
+}
+
+std::istream& Element::ext(std::istream& in)
+{
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const Element& rhs)
+{
+	return rhs.ins(out);
+}
+
+std::istream& operator>>(std::istream& in, Element& rhs)
+{
+	return rhs.ext(in);
 }

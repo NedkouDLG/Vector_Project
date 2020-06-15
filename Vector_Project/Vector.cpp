@@ -1,36 +1,39 @@
-#include "Vector.h"
+﻿#include "Vector.h"
 #include <cmath>
-Vector::Vector():baseX(0),baseY(0),baseZ(0)
+Vector::Vector()
 {
+	this->x = 0;
+	this->y = 0;
+	this->z = 0;
 }
 
-Vector::Vector(double x, double y, double z)
+Vector::Vector(const double& x, const double& y, const double& z)
 {
-	this->baseX = x;
-	this->baseY = y;
-	this->baseZ = z;
+	this->x = x;
+	this->y = y;
+	this->z = z;
 }
 
-Vector::Vector(Point a, Point b)
+Vector::Vector(const Point& a, const Point& b)
 {
-	this->baseX = b.getX() - a.getX();
-	this->baseY = b.getY() - a.getY();
-	this->baseZ = b.getZ() - a.getZ();
+	this->x = b.getX() - a.getX();
+	this->y = b.getY() - a.getY();
+	this->z = b.getZ() - a.getZ();
 }
 
 Vector::Vector(const Vector& rhs)
 {
-	this->baseX = rhs.getBaseX();
-	this->baseY = rhs.getBaseY();
-	this->baseZ = rhs.getBaseZ();
+	this->x = rhs.getX();
+	this->y = rhs.getY();
+	this->z = rhs.getZ();
 }
 
 Vector& Vector::operator=(const Vector& rhs)
 {
 	if (this != &rhs) {
-		this->baseX = rhs.getBaseX();
-		this->baseY = rhs.getBaseY();
-		this->baseZ = rhs.getBaseZ();
+		this->x = rhs.getX();
+		this->y = rhs.getY();
+		this->z = rhs.getZ();
 	}
 	return *this;
 }
@@ -39,45 +42,45 @@ Vector::~Vector()
 {
 }
 
-Vector Vector::operator+(const Vector& rhs)
+Vector operator+(const Vector& lhs, const Vector& rhs)
 {
 	Vector newVector;
-	newVector.setBaseX(this->getBaseX() + rhs.getBaseX());
-	newVector.setBaseY(this->getBaseY() + rhs.getBaseY());
-	newVector.setBaseZ(this->getBaseZ() + rhs.getBaseZ());
+	newVector.setX(lhs.getX() + rhs.getX());
+	newVector.setY(lhs.getY() + rhs.getY());
+	newVector.setZ(lhs.getZ() + rhs.getZ());
 	return newVector;
 }
 
-Vector Vector::operator-(const Vector& rhs)
+Vector operator-(const Vector& lhs, const Vector& rhs)
 {
 	Vector newVector;
-	newVector.setBaseX(this->getBaseX() - rhs.getBaseX());
-	newVector.setBaseY(this->getBaseY() - rhs.getBaseY());
-	newVector.setBaseZ(this->getBaseZ() - rhs.getBaseZ());
+	newVector.setX(lhs.getX() - rhs.getX());
+	newVector.setY(lhs.getY() - rhs.getY());
+	newVector.setZ(lhs.getZ() - rhs.getZ());
 	return newVector;
 }
 
-Vector Vector::operator^(const Vector& rhs)
+Vector operator^(const Vector& lhs, const Vector& rhs)
 {
 	Vector newVector;
-	newVector.setBaseX(this->getBaseY()*rhs.getBaseZ() - this->getBaseZ()*rhs.getBaseY());
-	newVector.setBaseY(this->getBaseZ()*rhs.getBaseX() - this->getBaseX()*rhs.getBaseZ());
-	newVector.setBaseZ(this->getBaseX()*rhs.getBaseY() - this->getBaseY()*rhs.getBaseX());
+	newVector.setX(lhs.getY()*rhs.getZ() - lhs.getZ()*rhs.getY());
+	newVector.setY(lhs.getZ()*rhs.getX() - lhs.getX()*rhs.getZ());
+	newVector.setZ(lhs.getX()*rhs.getY() - lhs.getY()*rhs.getX());
 	return newVector;
 }
 
-Vector Vector::operator*(const double& r)
+Vector operator*(const double& r, const Vector& rhs)
 {
 	Vector newVector;
-	newVector.setBaseX(this->getBaseX() * r);
-	newVector.setBaseY(this->getBaseY() * r);
-	newVector.setBaseZ(this->getBaseZ() * r);
+	newVector.setX(rhs.getX() * r);
+	newVector.setY(rhs.getY() * r);
+	newVector.setZ(rhs.getZ() * r);
 	return newVector;
 }
 
-double Vector::operator*(const Vector& rhs)
+double operator*(const Vector& lhs, const Vector& rhs)
 {
-	double sum = this->getBaseX() * rhs.getBaseX() + this->getBaseY() * rhs.getBaseY() + this->getBaseZ() * rhs.getBaseZ();
+	double sum = lhs.getX() * rhs.getX() + lhs.getY() * rhs.getY() + lhs.getZ() * rhs.getZ();
 	return sum;
 }
 
@@ -88,65 +91,91 @@ double Vector::operator()(const Vector& lhs, const Vector& rhs)
 	return sum;
 }
 
-double Vector::getBaseX() const
-{
-	return baseX;
-}
-
-double Vector::getBaseY() const
-{
-	return baseY;
-}
-
-double Vector::getBaseZ() const
-{
-	return baseZ;
-}
 
 double Vector::getLength() const
 {
-	double len = (double)sqrt(pow(baseX, 2) + pow(baseY, 2) + pow(baseZ, 2));
+	double len = (double)sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
 	return len;
 }
 
-void Vector::setBaseX(double x)
+Vector Vector::getDirection()//return&
 {
-	this->baseX = x;
+	if (this->getLength() == 0) {
+		throw VectorLengthException();
+		exit(1);
+	}
+	Vector newVector;
+	newVector.setX(this->x / this->getLength());
+	newVector.setY(this->y / this->getLength());
+	newVector.setZ(this->z / this->getLength());
+	return newVector;
 }
 
-void Vector::setBaseY(double y)
+void Vector::setX(double _x)
 {
-	this->baseY = y;
+	this->x = _x;
 }
 
-void Vector::setBaseZ(double z)
+void Vector::setY(double _y)
 {
-	this->baseZ = z;
+	this->y = _y;
 }
+
+void Vector::setZ(double _z)
+{
+	this->z = _z;
+}
+
+
 
 bool Vector::isZero() const
 {
-	if (baseX == baseY == baseZ == 0)
+	if (x == y == z == 0)
 		return true;
 	else
 		return false;
 }
 
-bool Vector::isParallel(const Vector& rhs) const
+bool Vector::isParallel(const Vector& rhs)
 {
-	double check1 = this->baseX / rhs.getBaseX();
-	double check2 = this->baseY / rhs.getBaseY();
-	double check3 = this->baseZ / rhs.getBaseZ();
+	if (this->getLength() == 0 || rhs.getLength() == 0) {
+		throw VectorLengthException();
+		exit(1);
+	}
+	double check1 = this->x / rhs.getX();
+	double check2 = this->y / rhs.getY();
+	double check3 = this->z / rhs.getZ();
 	if (check1 == check2 == check3) return true;
 	else return false;
 }
 
-bool Vector::isPerpendicular(const Vector& rhs) const
+bool Vector::isPerpendicular(const Vector& rhs)
 {
-	double check1 = this->baseX * rhs.getBaseX();
-	double check2 = this->baseY * rhs.getBaseY();
-	double check3 = this->baseZ * rhs.getBaseZ();
+	if (this->getLength() == 0 || rhs.getLength() == 0) {
+		throw VectorLengthException();
+		exit(1);
+	}
+	double check1 = this->x * rhs.getX();
+	double check2 = this->y * rhs.getY();
+	double check3 = this->z * rhs.getZ();
 	double sum = check1 + check2 + check3;
 	if (sum == 0) return true;
 	else return false;
+}
+
+std::istream& Vector::ext(std::istream& in)
+{
+	std::cout << "Please enter value x of vector: ";
+	in >> this->x;
+	std::cout << "Please enter value y of vector: ";
+	in >> this->y;
+	std::cout << "Please enter value z of vector: ";
+	in >> this->z;
+	return in;
+}
+
+std::ostream& Vector::ins(std::ostream& out) const
+{
+	out << "(" << this->x << ", " << this->y << ", " << this->z << ")";
+	return out;
 }

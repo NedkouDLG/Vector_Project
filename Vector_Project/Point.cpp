@@ -31,9 +31,9 @@ Point& Point::operator=(const Point& rhs)
 	return *this;
 }
 
-bool Point::operator==(const Point& rhs)
+bool operator==(const Point& lhs, const Point& rhs)
 {
-	if (this->getX() == rhs.getX() && this->getY() == rhs.getY() && this->getZ() == rhs.getZ()) {
+	if (lhs.getX() == rhs.getX() && lhs.getY() == rhs.getY() && lhs.getZ() == rhs.getZ()) {
 		return true;
 	}else 
 		return false;
@@ -42,4 +42,36 @@ bool Point::operator==(const Point& rhs)
 Point::~Point()
 {
 
+}
+
+void Point::setX(double _x)
+{
+	this->x = _x;
+}
+
+void Point::setY(double _y)
+{
+	this->y = _y;
+}
+
+void Point::setZ(double _z)
+{
+	this->z = _z;
+}
+
+std::istream& Point::ext(std::istream& in)
+{
+	std::cout << "Please enter value x of point: ";
+	in >> this->x;
+	std::cout << "Please enter value y of point: ";
+	in >> this->y;						  
+	std::cout << "Please enter value z of point: ";
+	in >> this->z;
+	return in;
+}
+
+std::ostream& Point::ins(std::ostream& out) const
+{
+	out << "(" << this->x << ", " << this->y << ", " << this->z << ")";
+	return out;
 }

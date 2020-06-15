@@ -1,37 +1,35 @@
 #pragma once
 #include "Point.h"
+#include "VectorLengthException.h"
 class Vector:public Point
 {
-private:
-	double baseX;
-	double baseY;
-	double baseZ;
 public:
 	Vector();
-	Vector(double, double, double);
-	Vector(Point, Point);
+	Vector(const double&, const double&, const double&);
+	Vector(const Point&, const Point&);
 	Vector(const Vector&);
 	Vector& operator =(const Vector&);
 	~Vector();
 
-	Vector operator +(const Vector&);
-	Vector operator -(const Vector&);
-	Vector operator ^(const Vector&);
-	Vector operator *(const double&);
-	double operator *(const Vector&);
+	
 	double operator ()(const Vector&, const Vector&);
 
-	double getBaseX() const;
-	double getBaseY() const;
-	double getBaseZ() const;
 	double getLength() const;
+	virtual Vector getDirection();
 
-	void setBaseX(double);
-	void setBaseY(double);
-	void setBaseZ(double);
+	virtual void setX(double);
+	virtual void setY(double);
+	virtual void setZ(double);
 
 	bool isZero() const;
-	bool isParallel(const Vector&) const;
-	bool isPerpendicular(const Vector&) const;
+	bool isParallel(const Vector&);
+	bool isPerpendicular(const Vector&);
+	virtual std::istream& ext(std::istream&);
+	virtual std::ostream& ins(std::ostream&) const;
 };
 
+Vector operator +(const Vector&, const Vector&);
+Vector operator -(const Vector&, const Vector&);
+Vector operator ^(const Vector&, const Vector&);
+Vector operator *(const double&, const Vector&);
+double operator *(const Vector&, const Vector&);
