@@ -75,7 +75,12 @@ int Interface::readVector(std::ifstream& file)
 		std::cout << "The length of vector is " << vector->getLength() << std::endl;
 		break;
 	case 2:
-		std::cout << "The direction of vector is " << vector->getDirection() << std::endl;
+		try {
+			std::cout << "The direction of vector is " << vector->getDirection() << std::endl;
+		}
+		catch (VectorLengthException& exc) {
+			std::cout << exc.what() << std::endl;
+		}
 		break;
 	case 3:
 		if (vector->isZero())
@@ -347,7 +352,12 @@ int Interface::menuVector(Vector*& vector, std::ifstream& file)
 		std::cout << "The length of vector is " << vector->getLength() << std::endl;
 		break;
 	case 2:
-		std::cout << "The direction of vector is " << vector->getDirection() << std::endl;
+		try {
+			std::cout << "The direction of vector is " << vector->getDirection() << std::endl;
+		}
+		catch (VectorLengthException& exc) {
+			std::cout << exc.what() << std::endl;
+		}
 		
 		break;
 	case 3:

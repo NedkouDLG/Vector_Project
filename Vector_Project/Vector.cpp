@@ -108,7 +108,7 @@ Vector Vector::getDirection()
 {
 	if (this->getLength() == 0) {
 		throw VectorLengthException(); //Хвърля се изключение ако дължината е 0
-		exit(1);
+		return Vector(0,0,0);
 	}
 	Vector newVector;
 	newVector.setX(this->x / this->getLength());
