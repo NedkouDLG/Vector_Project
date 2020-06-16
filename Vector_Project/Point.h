@@ -2,18 +2,17 @@
 #include "Element.h";
 class Point:public Element
 {
-	friend bool operator==(const Point&, const Point&);
 public:
+	//Големите 5
 	Point();
 	Point(double, double, double);
 	Point(const Point&);
 	Point& operator=(const Point&);
-	
 	~Point();
-	void setX(double);
-	void setY(double);
-	void setZ(double);
+
+	//Предифиниране на операциите за въвеждане и извеждане за класа Point
 	virtual std::istream& ext(std::istream&);
 	virtual std::ostream& ins(std::ostream&) const;
 };
+//Предифиниране на оператор ==
 bool operator==(const Point&, const Point&);

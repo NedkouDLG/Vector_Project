@@ -88,6 +88,17 @@ int main() {
 	delete v2;
 	delete result;*/
 	//Line line;
+	vector<double> d;
+	double n = 2.14;
+	int m = 5;
+	d.push_back(n);
+	d.push_back((double)m);
+	ofstream file("output.txt");
+	for (double s : d) {
+		file << s;
+		//file << "\n";
+	}
+	file.close();
 	Interface* inter = new Interface();
 	inter->execute();
 	delete inter;

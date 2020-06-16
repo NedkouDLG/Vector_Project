@@ -1,5 +1,20 @@
 #include "Element.h"
 
+void Element::setX(double _x)
+{
+	x = _x;
+}
+
+void Element::setY(double _y)
+{
+	y = _y;
+}
+
+void Element::setZ(double _z)
+{
+	z = _z;
+}
+
 double Element::getX() const
 {
 	return x;

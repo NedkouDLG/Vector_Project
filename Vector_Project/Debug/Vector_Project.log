@@ -1,4 +1,5 @@
-﻿  Interface.cpp
+﻿  Vector.cpp
 D:\GitHub\Vector_Project\Vector_Project\Point.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\GitHub\Vector_Project\Vector_Project\Interface.cpp(33): warning C4715: 'Interface::readObject': not all control paths return a value
+D:\GitHub\Vector_Project\Vector_Project\Vector.cpp(122,5): warning C4805: '==': unsafe mix of type 'bool' and type 'const double' in operation
+D:\GitHub\Vector_Project\Vector_Project\Vector.cpp(136,32): warning C4805: '==': unsafe mix of type 'bool' and type 'double' in operation
   Vector_Project.vcxproj -> D:\GitHub\Vector_Project\Debug\Vector_Project.exe

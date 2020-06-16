@@ -3,13 +3,13 @@
 #include "Point.h"
 class Triangle:public Point
 {
+	//Направени са функциите приятлески за да може да се достъпват private елементите на класа
 	friend bool operator<(const Point&, Triangle&);
 	friend bool operator>(const Point&, Triangle&);
 	friend bool operator==(const Point&, Triangle&);
 private:
 	Point a, b, c;
-
-	bool isInPlane(const Point&);//has to be private!!!
+	bool isInPlane(const Point&);
 public:
 	Triangle();
 	Triangle(Point, Point, Point);

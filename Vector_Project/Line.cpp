@@ -3,10 +3,9 @@
 #include <cmath>
 Line::Line()
 {
-	//std::cout << this->baseX << std::endl;
 }
 
-Line::Line(const Point& a, const Point& b)
+Line::Line(const Point& a, const Point& b)//Конструктор с параметри 2 точки
 {
 	Vector vector(a, b);
 	this->begin = a;
@@ -16,7 +15,7 @@ Line::Line(const Point& a, const Point& b)
 	this->z = direction.getZ();
 }
 
-Line::Line(const Point& a, const Vector& vector)
+Line::Line(const Point& a, const Vector& vector)//Конструктор с параметри начална точка и вектор
 {
 	this->begin = a;
 	this->direction  = vector;
@@ -25,7 +24,7 @@ Line::Line(const Point& a, const Vector& vector)
 	this->z = direction.getZ();
 }
 
-Line::Line(const Line& rhs)
+Line::Line(const Line& rhs)//Копиращ конструктор
 {
 	this->begin = rhs.begin;
 	this->direction = rhs.direction;
@@ -34,12 +33,12 @@ Line::Line(const Line& rhs)
 	this->z = direction.getZ();
 }
 
-Line::~Line()
+Line::~Line()//Деструктор
 {
 
 }
 
-Line& Line::operator=(const Line& rhs)
+Line& Line::operator=(const Line& rhs)//ПРедифиниране на оператор =
 {
 	if (this != &rhs) {
 		this->begin = rhs.begin;
@@ -50,22 +49,7 @@ Line& Line::operator=(const Line& rhs)
 	}
 	return *this;
 }
-
-void Line::setX(double _x)
-{
-	this->x = _x;
-}
-
-void Line::setY(double _y)
-{
-	this->y = _y;
-}
-
-void Line::setZ(double _z)
-{
-	this->z = _z;
-}
-
+//Предифиниране на гетърите да връщат x y z от посоката на вектора
 double Line::getX() const
 {
 	return direction.getX();
@@ -80,7 +64,7 @@ double Line::getZ() const
 {
 	return direction.getZ();
 }
-
+//Връщане на координатите на начлната точна на правата
 double Line::getPointX() const
 {
 	return begin.getX();
@@ -95,13 +79,13 @@ double Line::getPointZ() const
 {
 	return begin.getZ();
 }
-
+//връща се посоката не правата
 Vector Line::getDirection()
 {
 	Vector vector(direction.getX(), direction.getY(), direction.getZ());
 	return vector;
 }
-
+//връща се вектор перпендикулярен на правата
 Vector* Line::getPerpendicularOfLine()
 {
 	
@@ -109,7 +93,7 @@ Vector* Line::getPerpendicularOfLine()
 	Vector* v = new Vector(1, 1, z);
 	return v;
 }
-
+//пресмята се ъгъла между две прави в радиани
 double Line::angle(Line& rhs)
 {
 	double dot = (this->direction) * (rhs.getDirection());
@@ -117,9 +101,10 @@ double Line::angle(Line& rhs)
 	double bMag = rhs.direction.getLength();
 	double sum = dot / (aMag * bMag);
 	
-	return acos(sum);
+	return acos(sum);//Пресмята се като се върне arccos на скаларното произведение на посоките на двете прави
+					//се разедли на прозиведението на двете дължини на двете посоки на прави
 }
-
+//Въвеждане на права чрез >>
 std::istream& Line::ext(std::istream& in)
 {
 	std::cout << "Please enter first point" << std::endl;
@@ -140,18 +125,18 @@ std::istream& Line::ext(std::istream& in)
 	delete point2;
 	return in;
 }
-
+//Извеждане на права чрез <<
 std::ostream& Line::ins(std::ostream& out) const
 {
 
 	return out;
 }
-
+//Проверяват се дали двете прави са успоредни
 bool operator||(Line& lhs, Line& rhs)
 {
 	return lhs.getDirection().isParallel(rhs.getDirection());
 }
-
+//Проверяват се дали двете прави съвпадат
 bool operator==(const Line& lhs, const Line& rhs)
 {
 	if (lhs.getPointX() == rhs.getPointX() && lhs.getPointY() == rhs.getPointY() && lhs.getPointZ() == rhs.getPointZ()) {
@@ -159,13 +144,13 @@ bool operator==(const Line& lhs, const Line& rhs)
 	}
 	return false;
 }
-
+//Проверяват се дали двете прави са перпендикулярни
 bool operator|(Line& lhs, Line& rhs)
 {
 	return lhs.getDirection().isPerpendicular(rhs.getDirection());
 	return false;
 }
-
+//Проверява се дали дадена точка лежи на правата
 bool operator+(const Point& lhs, Line& rhs)
 {
 	double t = (lhs.getX() - rhs.getPointX()) / rhs.getDirection().getX();

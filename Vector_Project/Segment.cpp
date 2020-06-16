@@ -1,12 +1,13 @@
 #include "Segment.h"
 #include "Segment.h"
 
-Segment::Segment()
+Segment::Segment() //Default конструктор
 {
 }
 
-Segment::Segment(const Point& a, const Point& b)
+Segment::Segment(const Point& a, const Point& b)//Конструктор са параметри 2 точки
 {
+	//Създава се права и се намира интервала в който е отсечката
 	this->a = new Point(a);
 	this->b = new Point(b);
 	Line* line = new Line(a, b);
@@ -17,14 +18,14 @@ Segment::Segment(const Point& a, const Point& b)
 	
 }
 
-Segment::Segment(const Segment& rhs)
+Segment::Segment(const Segment& rhs)//Копиращ конструктор
 {
 	tStart = rhs.tStart;
 	tEnd = rhs.tEnd;
 	a = rhs.a;
 	b = rhs.b;
 }
-
+//Предифиниране на оператор =
 Segment& Segment::operator=(const Segment& rhs)
 {
 	if (this != &rhs) {
@@ -34,21 +35,20 @@ Segment& Segment::operator=(const Segment& rhs)
 		b = rhs.b;
 	}
 	return *this;
-	// TODO: insert return statement here
 }
 
-Segment::~Segment()
+Segment::~Segment()//Деструктор
 {
 	delete a;
 	delete b;
 }
-
+//Връща дължината на отсечката
 double Segment::getLenght() const
 {
 	Vector* vec = new Vector((*a), (*b));
 	return vec->getLength();
 }
-
+//Връща средата на отсечката
 Point Segment::getMiddle()
 {
 	double _x = (a->getX() + b->getX()) / 2;
@@ -56,7 +56,7 @@ Point Segment::getMiddle()
 	double _z = (a->getZ() + b->getZ()) / 2;
 	return Point(_x,_y,_z);
 }
-
+//Въвеждане на отсечка чрез >>
 std::istream& Segment::ext(std::istream& in)
 {
 	Point* a = new Point();

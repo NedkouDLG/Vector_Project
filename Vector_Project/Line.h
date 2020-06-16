@@ -12,10 +12,6 @@ public:
 	Line(const Line&);
 	~Line();
 	Line& operator=(const Line&);
-
-	virtual void setX(double);
-	virtual void setY(double);
-	virtual void setZ(double);
 	
 	virtual double getX() const;
 	virtual double getY() const;

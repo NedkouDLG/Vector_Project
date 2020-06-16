@@ -1,5 +1,4 @@
 ﻿#include "Interface.h"
-
 int Interface::readObject()
 {
 	std::ifstream file("file.txt", std::ios::in);
@@ -9,7 +8,7 @@ int Interface::readObject()
 	}
 	int n = 0;
 	file >> n;
-	//std::cout << n << std::endl;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -38,8 +37,12 @@ int Interface::readPoint(std::ifstream& file)
 	file >> x;
 	file >> y;
 	file >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	int n;
 	file >> n;
+	stream.push_back(n);
 	//std::cout << x << " " << y << " " << z << std::endl;
 	Point* point = new Point(x, y, z);
 	switch (n)
@@ -59,8 +62,12 @@ int Interface::readVector(std::ifstream& file)
 	file >> x;
 	file >> y;
 	file >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	int n;
 	file >> n;
+	stream.push_back(n);
 	Vector* vector = new Vector(x, y, z);
 	switch (n)
 	{
@@ -105,14 +112,21 @@ int Interface::readLine(std::ifstream& file)
 {
 	double x = 0.0, y = 0.0, z = 0.0;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	Point p1(x, y, z);
 	char ch;
 	file >> ch;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	Point p2(x, y, z);
 	Line* line = new Line(p1, p2);
 	int n;
 	file >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -146,14 +160,21 @@ int Interface::readSegment(std::ifstream& file)
 {
 	double x = 0.0, y = 0.0, z = 0.0;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	Point p1(x, y, z);
 	char ch;
 	file >> ch;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	Point p2(x, y, z);
 	Segment* segment = new Segment(p1, p2);
 	int n = 0;
 	file >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -171,14 +192,23 @@ int Interface::readTriangle(std::ifstream& file)
 {
 	double x = 0.0, y = 0.0, z = 0.0;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	char ch;
 	file >> ch;
 	Point p1(x, y, z);
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	file >> ch;
 	Point p2(x, y, z);
 	file >> ch;
 	file >> x >> y >> z;
+	stream.push_back(x);
+	stream.push_back(y);
+	stream.push_back(z);
 	Point p3(x, y, z);
 	Triangle* triangle = new Triangle();
 	try {
@@ -189,6 +219,7 @@ int Interface::readTriangle(std::ifstream& file)
 	}
 	int n = 0;
 	file >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -233,6 +264,7 @@ int Interface::mainMenu()
 	Triangle* triangle = nullptr;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -266,11 +298,15 @@ int Interface::menuPoint(Point*& point, std::ifstream& file)
 		point = new Point();
 		std::cin >> *point;
 	}
+	stream.push_back(point->getX());
+	stream.push_back(point->getY());
+	stream.push_back(point->getZ());
 	std::cout << "Please choose operation for the object:" << std::endl;
 	std::cout << "	1 - check if two points coincide " << std::endl;
 	std::cout << "0 - Go Back" << std::endl;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -287,6 +323,9 @@ int Interface::menuVector(Vector*& vector, std::ifstream& file)
 		vector = new Vector();
 		std::cin >> (*vector);
 	}
+	stream.push_back(vector->getX());
+	stream.push_back(vector->getY());
+	stream.push_back(vector->getZ());
 	std::cout << "Please choose operation for the object:" << std::endl;
 	std::cout << "	1 - calculate length of vector" << std::endl;
 	std::cout << "	2 - calculate direction of vector" << std::endl;
@@ -301,6 +340,7 @@ int Interface::menuVector(Vector*& vector, std::ifstream& file)
 	std::cout << "0 - Go Back" << std::endl;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -347,6 +387,9 @@ int Interface::menuLine(Line*& line, std::ifstream& file)
 		line = new Line();
 		std::cin >> (*line);
 	}
+	stream.push_back(line->getX());
+	stream.push_back(line->getY());
+	stream.push_back(line->getZ());
 	std::cout << "Please choose operation for the object:" << std::endl;
 	std::cout << "	1 - Find direction of line" << std::endl;
 	std::cout << "	2 - Find normal vector" << std::endl;
@@ -358,6 +401,7 @@ int Interface::menuLine(Line*& line, std::ifstream& file)
 	std::cout << "0 - Go Back" << std::endl;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 		case 1:
@@ -382,9 +426,6 @@ int Interface::menuLine(Line*& line, std::ifstream& file)
 		isLinePerpendicularToLine(line,file);
 		break;
 	}
-
-	
-	
 	return n;
 }
 
@@ -394,12 +435,16 @@ int Interface::menuSegment(Segment*& segment)
 		segment = new Segment();
 		std::cin >> *segment;
 	}
+	stream.push_back(segment->getX());
+	stream.push_back(segment->getY());
+	stream.push_back(segment->getZ());
 	std::cout << "Please choose operation for the object:" << std::endl;
 	std::cout << "	1 - Find length of segment" << std::endl;
 	std::cout << "	2 - Find center of segment" << std::endl;
 	std::cout << "0 - Go Back" << std::endl;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -415,7 +460,7 @@ int Interface::menuSegment(Segment*& segment)
 
 int Interface::menuTriangle(Triangle*& triangle, std::ifstream& file)
 {
-	if(triangle==nullptr)
+	if (triangle == nullptr)
 		try
 		{
 			triangle = new Triangle();
@@ -424,9 +469,8 @@ int Interface::menuTriangle(Triangle*& triangle, std::ifstream& file)
 		catch (const EqualPointException& exception)
 		{
 			std::cout << "An equal point exception occured: " << exception.what() << std::endl;
-			//triangle = new Triangle();
 		}
-	
+
 	std::cout << "Please choose operation for the object:" << std::endl;
 	std::cout << "	1 - Define type of triangle" << std::endl;
 	std::cout << "	2 - Find area of triangle" << std::endl;
@@ -438,6 +482,7 @@ int Interface::menuTriangle(Triangle*& triangle, std::ifstream& file)
 	std::cout << "0 - Go Back" << std::endl;
 	int n;
 	std::cin >> n;
+	stream.push_back(n);
 	switch (n)
 	{
 	case 1:
@@ -841,6 +886,23 @@ void Interface::checkPointLiesSide(Triangle*& rhs, std::ifstream& file)
 
 Interface::Interface()
 {
+}
+
+Interface::Interface(std::vector<double> rhs)
+{
+	stream = rhs;
+}
+
+Interface::Interface(const Interface& rhs)
+{
+	stream = rhs.stream;
+}
+
+Interface& Interface::operator=(const Interface& rhs)
+{
+	if (this != &rhs)
+		stream = rhs.stream;
+	return *this;
 }
 
 Interface::~Interface()

@@ -3,9 +3,13 @@
 #include "Segment.h"
 #include <fstream>
 #include <iomanip>
+#include <vector>
 class Interface
 {
 private:
+	std::vector<double> stream;
+
+
 	int readObject();
 	int readPoint(std::ifstream&);
 	int readVector(std::ifstream&);
@@ -51,6 +55,9 @@ private:
 	void checkPointLiesSide(Triangle*&, std::ifstream&);
 public:
 	Interface();
+	Interface(std::vector<double>);
+	Interface(const Interface&);
+	Interface& operator=(const Interface&);
 	~Interface();
 	void execute();
 };
